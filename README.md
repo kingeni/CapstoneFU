@@ -1,5 +1,4 @@
 # Tracking Indoor Object using Bluetooth Low Energy		
-# content (including result and product):
   The system uses low-power bluetooth technology integrated in devices (device 1) mounted on the objects to be monitored. These devices will continuously emit an identifying information for that device. 
    Another type of device (device 2) is attached to the space around the architecture. It will pick up waves emitted by devices mounted on the objects.
      After device 2 receives the signal, it sends the result to the central gateway using the wifi signal. The central gateway will calculate the position of the object by algorithm to determine the location based on the received signal strength and then send the results to the online server. We can track the exact location of the object with a radius of <0.5m via the administration website.
