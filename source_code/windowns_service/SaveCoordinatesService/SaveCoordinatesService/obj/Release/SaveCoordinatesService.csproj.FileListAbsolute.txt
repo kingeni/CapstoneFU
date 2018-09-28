@@ -1,0 +1,15 @@
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\bin\Release\SaveCoordinatesService.exe.config
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\bin\Release\SaveCoordinatesService.exe
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\bin\Release\SaveCoordinatesService.pdb
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\bin\Release\Google.Protobuf.dll
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\bin\Release\M2Mqtt.Net.dll
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\bin\Release\MySql.Data.dll
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\bin\Release\System.Management.Automation.dll
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\bin\Release\Google.Protobuf.xml
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\bin\Release\M2Mqtt.Net.pdb
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\bin\Release\MySql.Data.xml
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\obj\Release\SaveCoordinatesService.ProjectInstaller.resources
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\obj\Release\SaveCoordinatesService.csproj.GenerateResource.Cache
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\obj\Release\SaveCoordinatesService.csproj.CoreCompileInputs.cache
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\obj\Release\SaveCoordinatesService.exe
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\obj\Release\SaveCoordinatesService.pdb

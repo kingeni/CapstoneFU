@@ -1,0 +1,7 @@
+C:\Users\Huy Ta\source\repos\DirectoryInfo_Demo\DirectoryInfo_Demo\bin\Debug\DirectoryInfo_Demo.exe.config
+C:\Users\Huy Ta\source\repos\DirectoryInfo_Demo\DirectoryInfo_Demo\bin\Debug\DirectoryInfo_Demo.exe
+C:\Users\Huy Ta\source\repos\DirectoryInfo_Demo\DirectoryInfo_Demo\bin\Debug\DirectoryInfo_Demo.pdb
+C:\Users\Huy Ta\source\repos\DirectoryInfo_Demo\DirectoryInfo_Demo\obj\Debug\DirectoryInfo_Demo.csprojResolveAssemblyReference.cache
+C:\Users\Huy Ta\source\repos\DirectoryInfo_Demo\DirectoryInfo_Demo\obj\Debug\DirectoryInfo_Demo.csproj.CoreCompileInputs.cache
+C:\Users\Huy Ta\source\repos\DirectoryInfo_Demo\DirectoryInfo_Demo\obj\Debug\DirectoryInfo_Demo.exe
+C:\Users\Huy Ta\source\repos\DirectoryInfo_Demo\DirectoryInfo_Demo\obj\Debug\DirectoryInfo_Demo.pdb

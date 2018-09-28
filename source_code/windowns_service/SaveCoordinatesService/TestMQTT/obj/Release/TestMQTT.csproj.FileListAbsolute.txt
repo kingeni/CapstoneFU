@@ -1,0 +1,12 @@
+C:\Users\Huy Ta\source\repos\SaveCoordinatesService\TestMQTT\bin\Release\TestMQTT.exe.config
+C:\Users\Huy Ta\source\repos\SaveCoordinatesService\TestMQTT\bin\Release\TestMQTT.exe
+C:\Users\Huy Ta\source\repos\SaveCoordinatesService\TestMQTT\bin\Release\TestMQTT.pdb
+C:\Users\Huy Ta\source\repos\SaveCoordinatesService\TestMQTT\bin\Release\Google.Protobuf.dll
+C:\Users\Huy Ta\source\repos\SaveCoordinatesService\TestMQTT\bin\Release\M2Mqtt.Net.dll
+C:\Users\Huy Ta\source\repos\SaveCoordinatesService\TestMQTT\bin\Release\MySql.Data.dll
+C:\Users\Huy Ta\source\repos\SaveCoordinatesService\TestMQTT\bin\Release\Google.Protobuf.xml
+C:\Users\Huy Ta\source\repos\SaveCoordinatesService\TestMQTT\bin\Release\M2Mqtt.Net.pdb
+C:\Users\Huy Ta\source\repos\SaveCoordinatesService\TestMQTT\bin\Release\MySql.Data.xml
+C:\Users\Huy Ta\source\repos\SaveCoordinatesService\TestMQTT\obj\Release\TestMQTT.csproj.CoreCompileInputs.cache
+C:\Users\Huy Ta\source\repos\SaveCoordinatesService\TestMQTT\obj\Release\TestMQTT.exe
+C:\Users\Huy Ta\source\repos\SaveCoordinatesService\TestMQTT\obj\Release\TestMQTT.pdb
