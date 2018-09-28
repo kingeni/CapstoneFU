@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\helper\MQTT;
 use Yii;
 
 /**
@@ -27,4 +28,15 @@ class SiteController extends \yii\web\Controller
 
         return parent::beforeAction($action);
     }
+
+    public function actionPublish()
+    {
+        $mqtt = new MQTT("broker.hivemq.com", 1883, "phpMQTT-subscriber"); //Change client name to something unique
+
+        if ($mqtt->connect()) {
+            $mqtt->publish("presence", "asjjldjalksjd", 0);
+            $mqtt->close();
+        }
+    }
+
 }

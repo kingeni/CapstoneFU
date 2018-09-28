@@ -39,6 +39,7 @@ $config = [
             'class' => backend\modules\rbac\Module::class,
             'defaultRoute' => 'rbac-auth-item/index',
         ],
+		'gridview' => ['class' => 'kartik\grid\Module'],
     ],
     'as globalAccess' => [
         'class' => common\behaviors\GlobalAccessBehavior::class,
