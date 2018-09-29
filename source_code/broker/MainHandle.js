@@ -1,27 +1,60 @@
+var CONSTANT = require('../broker/Constant.js');
 
-var aa = [2, 1];
-var bb = [6, 4];
-var cc = createEquationsVia2Point(aa, bb);
-var dd = [];
+function getCoordinates(radiusA, radiusB, radiusC) {
+    var linearEquaArr = [];
+    var pointArrCr1 = [];
+    var pointArrCr2 = [];
+    var midPoint = [];
+    var equaMidPoint = [];
+    var result = [];
+    //create linear equation  goes throught two point center
+    linearEquaArr[0] = createEquationsVia2Point(CONSTANT.A, CONSTANT.B);
+    linearEquaArr[1] = createEquationsVia2Point(CONSTANT.A, CONSTANT.C);
 
-dd[0] = getPoint(aa, cc, 3);
-dd[1] = getPoint(bb, cc, 1.5);
+    // get intersection of circles and lines
+    pointArrCr1[0] = getPoint(CONSTANT.A, linearEquaArr[0], radiusA);
+    pointArrCr1[1] = getPoint(CONSTANT.B, linearEquaArr[0], radiusB);
+    pointArrCr2[0] = getPoint(CONSTANT.A, linearEquaArr[1], radiusA);
+    pointArrCr2[1] = getPoint(CONSTANT.C, linearEquaArr[1], radiusC);
 
-console.log(dd);
-getMidPoint(dd[0], dd[1]);
+    // get mid point 
+    midPoint[0] = getMidPoint(pointArrCr1[0], pointArrCr1[1]);
+    midPoint[1] = getMidPoint(pointArrCr2[0], pointArrCr2[1]);
+
+    // create equation linear goes throught midPoint and perpendicular
+    equaMidPoint[0] = getEquationThroughMidPoint(linearEquaArr[0], midPoint[0]);
+    equaMidPoint[1] = getEquationThroughMidPoint(linearEquaArr[1], midPoint[1]);
+
+    // find coordinates of objects
+    result = gauss(equaMidPoint);
+    return result;
+}
+
+function getEquationThroughMidPoint(equation, midPoint) {
+    // a.a' = -1 
+    var a = -1 / equation[1];
+    // b = y(midpoint) -a' * x(midPoint)
+    var b = midPoint[1] - a * midPoint[0];
+    // New Equation throught midPoint
+    var arry = [];
+    // y = ax + b => -ax + y = b
+    arry[0] = (-1)* a;
+    arry[1] = 1;
+    arry[2] = b;
+    return [...arry];
+}
 
 function getMidPoint(pointListA, pointListB) {
-
     var max = 0;
     var pointMid = [];
     var maxPosi = [];
     var sumX = 0;
     var sumY = 0;
+
     //save position of max length
     for (var i = 0; i < 2; i++) {
         for (var j = 0; j < 2; j++) {
             var distance = getDistanceFromTwoPoint(pointListA[i], pointListB[j]);
-            console.log(distance);
             if (distance > max) {
                 maxPosi[0] = pointListA[i][0] + pointListB[j][0];
                 maxPosi[1] = pointListA[0][i] + pointListB[0][j];
@@ -33,9 +66,10 @@ function getMidPoint(pointListA, pointListB) {
         sumX = pointListA[i][0] + pointListB[i][0];
         sumy = pointListA[0][i] + pointListB[0][i];
     }
+
     pointMid[0] = Math.round(((sumX - maxPosi[0]) / 2) * 100) / 100;
     pointMid[1] = Math.round(((sumY - maxPosi[1]) / 2) * 100) / 100;
-    console.log(pointMid);
+
     return pointMid;
 }
 
@@ -73,7 +107,6 @@ function solveQuadraticEquation2(a, b, c) {
 }
 
 function getDistanceFromTwoPoint(A, B) {
-
     var distanceAB = 0;
     for (var i = 0; i < 2; i++) {
         distanceAB += Math.pow((A[i] - B[i]), 2);
@@ -191,7 +224,6 @@ function contHexToString(A) {
 
 module.exports = {
     contHexToString: contHexToString,
-    gauss: gauss,
-    createNewEquations: createNewEquations
-}
+    getCoordinates : getCoordinates
+};
 
