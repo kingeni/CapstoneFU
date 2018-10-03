@@ -1,5 +1,5 @@
 var CONSTANT = require('../broker/Constant.js');
-var test = getCoordinates(3, 2, 1);
+
 
 function getCoordinates(radiusA, radiusB, radiusC) {
     var linearEquaArr = [];
@@ -18,17 +18,17 @@ function getCoordinates(radiusA, radiusB, radiusC) {
     pointArrCr1[1] = getPoint(CONSTANT.B, linearEquaArr[0], radiusB);
     pointArrCr2[0] = getPoint(CONSTANT.A, linearEquaArr[1], radiusA);
     pointArrCr2[1] = getPoint(CONSTANT.C, linearEquaArr[1], radiusC);
-   
+
 
     // get mid point 
     midPoint[0] = getMidPoint(pointArrCr1[0], pointArrCr1[1]);
     midPoint[1] = getMidPoint(pointArrCr2[0], pointArrCr2[1]);
-  
+
 
     // create equation linear goes throught midPoint and perpendicular
     equaMidPoint[0] = getEquationThroughMidPoint(linearEquaArr[0], midPoint[0]);
     equaMidPoint[1] = getEquationThroughMidPoint(linearEquaArr[1], midPoint[1]);
-  
+
     // find coordinates of objects
     result = gauss(equaMidPoint);
     return result;
@@ -57,17 +57,17 @@ function getMidPoint(pointListA, pointListB) {
 
     //save position of max length
     for (var i = 0; i < 2; i++) {
-        sumX += (pointListA[i][0] + pointListB[i][0]) ;
+        sumX += (pointListA[i][0] + pointListB[i][0]);
         sumY += (pointListA[i][1] + pointListB[i][1]);
         for (var j = 0; j < 2; j++) {
             var distance = getDistanceFromTwoPoint(pointListA[i], pointListB[j]);
-           
+
             if (distance > max) {
                 max = distance;
-             
+
                 maxPosi[0] = pointListA[i][0] + pointListB[j][0];
                 maxPosi[1] = pointListA[i][1] + pointListB[j][1];
-            
+
             }
         }
     }
@@ -216,7 +216,7 @@ function contHexToString(A) {
 
     // cut space in string
     let newText = A.split(' ').filter(word => word !== "");
-
+    console.log(newText);
     //convert string to 16 then convert to ASCII
     let _newText = newText.map(x => String.fromCharCode(parseInt(x, 16)));
     let result = "";
@@ -224,7 +224,15 @@ function contHexToString(A) {
     //convert Array to string
     _newText.forEach(x => result += x);
 
-    return [...result];
+    //
+    newText = result.split('|');
+    newText[1] = caculateDistance(parseInt(newText[1]));
+    return [...newText];
+}
+
+function caculateDistance(RSSI) {
+    var distance = Math.pow(10, ((CONSTANT.TXPOWER - RSSI) / 10 * CONSTANT.N));
+    return distance;
 }
 
 module.exports = {
