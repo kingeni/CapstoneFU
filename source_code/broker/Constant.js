@@ -1,5 +1,6 @@
 // beacons coordinates 
-module.exports.A = [2, 1];
-module.exports.B = [1, -2];
-module.exports.C = [0, 3, 0];
+module.exports.A = [0, 1];
+module.exports.B = [3, 3];
+module.exports.C = [-1, 5];
 module.exports.D = [1, 2, 6];
+
