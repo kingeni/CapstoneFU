@@ -76,12 +76,14 @@ BLEScanResults scanBeacon() {
 }
 void publicMsg(BLEScanResults foundDevices) {
   for (int i = 0;i < foundDevices.getCount();i++) {
-    Serial.print("Devices: " + i);
+	  Serial.println();
+	  delay(100);
+    Serial.print("MAC: "+i);
     Serial.print(foundDevices.getDevice(i).getAddress().toString().c_str());
     Serial.print("RSSI:");
     Serial.print(foundDevices.getDevice(i).getRSSI());
     Serial.println();
-    snprintf(msg, 100, "Devices: %s RSSI: %ld",foundDevices.getDevice(i).getAddress().toString().c_str(), foundDevices.getDevice(i).getRSSI());
+    snprintf(msg, 100, "%s|%ld",foundDevices.getDevice(i).getAddress().toString().c_str(), foundDevices.getDevice(i).getRSSI());
     client.publish(mqtt_topic, msg);
   }
   Serial.println("Public data done!");

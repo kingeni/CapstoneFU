@@ -208,5 +208,4 @@ C:\Users\mtquan\AppData\Local\Temp\VMBuilds\BLE_scan_demoOK\esp32_esp32\Debug\BL
  C:\Users\mtquan\AppData\Local\arduino15\packages\esp32\hardware\esp32\1.0.0\libraries\BLE\src/BLEScan.h \
  C:\Users\mtquan\AppData\Local\arduino15\packages\esp32\hardware\esp32\1.0.0\libraries\BLE\src/BLEAdvertisedDevice.h \
  C:\Users\mtquan\AppData\Local\arduino15\packages\esp32\hardware\esp32\1.0.0\libraries\WiFi\src/WiFiClient.h \
- C:\Users\mtquan\Documents\Arduino\libraries\PubSubClient\src/PubSubClient.h \
- C:\Program\ Files\ (x86)\Microsoft\ Visual\ Studio\2017\Community\Common7\IDE\Extensions\hmm5bhw5.c2x\Micro\ Platforms\default\debuggers\VM_DBG/VM_DBG.h
+ C:\Users\mtquan\Documents\Arduino\libraries\PubSubClient\src/PubSubClient.h
