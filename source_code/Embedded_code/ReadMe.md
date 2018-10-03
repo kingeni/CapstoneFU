@@ -11,4 +11,4 @@
 		* Port: Your board port.
 	+ Upload this file to your board.
 	+ Follow the result at your serial command or Broker Reciever windows!
-- In this code, we will send Mac-Address and RSSI signals to Local broker base on Raspberry. 
+- In this code, we will send ESP ID, Mac-Address and RSSI signals to Local broker base on Raspberry. 
