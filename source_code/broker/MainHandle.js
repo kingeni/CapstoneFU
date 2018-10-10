@@ -1,4 +1,5 @@
 var CONSTANT = require('../broker/Constant.js');
+<<<<<<< HEAD
 
 function getCoordinates(radiusA, radiusB, radiusC) {
     var linearEquaArr = [];
@@ -44,6 +45,57 @@ function getEquationThroughMidPoint(equation, midPoint) {
     return [...arry];
 }
 
+=======
+
+
+function getCoordinates(radiusA, radiusB, radiusC) {
+    var linearEquaArr = [];
+    var pointArrCr1 = [];
+    var pointArrCr2 = [];
+    var midPoint = [];
+    var equaMidPoint = [];
+    var result = [];
+
+    //create linear equation  goes throught two point center
+    linearEquaArr[0] = createEquationsVia2Point(CONSTANT.A, CONSTANT.B);
+    linearEquaArr[1] = createEquationsVia2Point(CONSTANT.A, CONSTANT.C);
+
+    // get intersection of circles and lines
+    pointArrCr1[0] = getPoint(CONSTANT.A, linearEquaArr[0], radiusA);
+    pointArrCr1[1] = getPoint(CONSTANT.B, linearEquaArr[0], radiusB);
+    pointArrCr2[0] = getPoint(CONSTANT.A, linearEquaArr[1], radiusA);
+    pointArrCr2[1] = getPoint(CONSTANT.C, linearEquaArr[1], radiusC);
+
+
+    // get mid point 
+    midPoint[0] = getMidPoint(pointArrCr1[0], pointArrCr1[1]);
+    midPoint[1] = getMidPoint(pointArrCr2[0], pointArrCr2[1]);
+
+
+    // create equation linear goes throught midPoint and perpendicular
+    equaMidPoint[0] = getEquationThroughMidPoint(linearEquaArr[0], midPoint[0]);
+    equaMidPoint[1] = getEquationThroughMidPoint(linearEquaArr[1], midPoint[1]);
+
+    // find coordinates of objects
+    result = gauss(equaMidPoint);
+    return result;
+}
+
+function getEquationThroughMidPoint(equation, midPoint) {
+    // a.a' = -1 
+    var a = -1 / equation[1];
+    // b = y(midpoint) -a' * x(midPoint)
+    var b = midPoint[1] - a * midPoint[0];
+    // New Equation throught midPoint
+    var arry = [];
+    // y = ax + b => -ax + y = b
+    arry[0] = (-1) * a;
+    arry[1] = 1;
+    arry[2] = b;
+    return [...arry];
+}
+
+>>>>>>> origin/mtquan_home
 function getMidPoint(pointListA, pointListB) {
     var max = 0;
     var pointMid = [];
@@ -53,20 +105,32 @@ function getMidPoint(pointListA, pointListB) {
 
     //save position of max length
     for (var i = 0; i < 2; i++) {
+        sumX += (pointListA[i][0] + pointListB[i][0]);
+        sumY += (pointListA[i][1] + pointListB[i][1]);
         for (var j = 0; j < 2; j++) {
             var distance = getDistanceFromTwoPoint(pointListA[i], pointListB[j]);
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/mtquan_home
             if (distance > max) {
+                max = distance;
+
                 maxPosi[0] = pointListA[i][0] + pointListB[j][0];
-                maxPosi[1] = pointListA[0][i] + pointListB[0][j];
+                maxPosi[1] = pointListA[i][1] + pointListB[j][1];
+
             }
         }
     }
 
+<<<<<<< HEAD
     for (var i = 0; i < 2; i++) {
         sumX = pointListA[i][0] + pointListB[i][0];
         sumy = pointListA[0][i] + pointListB[0][i];
     }
 
+=======
+>>>>>>> origin/mtquan_home
     pointMid[0] = Math.round(((sumX - maxPosi[0]) / 2) * 100) / 100;
     pointMid[1] = Math.round(((sumY - maxPosi[1]) / 2) * 100) / 100;
 
@@ -137,7 +201,7 @@ function createEquationsVia2Point(A, B) {
     equa[2] = result[1];
     equa[1] = result[0];
     var b = equa.map(digit => Math.round(digit * 100) / 100);
-    console.log(b);
+
     return [...b];
 }
 /* 
@@ -211,7 +275,7 @@ function contHexToString(A) {
 
     // cut space in string
     let newText = A.split(' ').filter(word => word !== "");
-
+    console.log(newText);
     //convert string to 16 then convert to ASCII
     let _newText = newText.map(x => String.fromCharCode(parseInt(x, 16)));
     let result = "";
@@ -219,11 +283,23 @@ function contHexToString(A) {
     //convert Array to string
     _newText.forEach(x => result += x);
 
-    return [...result];
+    //
+    newText = result.split('|');
+    newText[1] = caculateDistance(parseInt(newText[1]));
+    return [...newText];
+}
+
+function caculateDistance(RSSI) {
+    var distance = Math.pow(10, ((CONSTANT.TXPOWER - RSSI) / 10 * CONSTANT.N));
+    return distance;
 }
 
 module.exports = {
     contHexToString: contHexToString,
+<<<<<<< HEAD
     getCoordinates : getCoordinates
+=======
+    getCoordinates: getCoordinates
+>>>>>>> origin/mtquan_home
 };
 
