@@ -11,9 +11,8 @@
 
 
 
-<<<<<<< HEAD
 const char* ssid = "TIC";      
-const char* password = "Agiftfromtheheart";  
+const char* password = "Youareusingticwifi";  
 
 const char* mqtt_server = "m15.cloudmqtt.com";       
 const int mqtt_port = 14160;
@@ -24,26 +23,22 @@ const char *mqtt_topic = "/beacon/data";
 char msg[50];
 int scanTime = 3; //In seconds
 
-=======
-const char* ssid = "TMA Lab 9 2.4Ghz";      
-const char* password = "12345x@X";  
-
-const char* mqtt_server = "m14.cloudmqtt.com";       
-const int mqtt_port = 13316;
-const char *mqtt_user = "krvzvfeh";       
-const char *mqtt_pass = "DsQv2w7F1gOA";
-const char *mqtt_client_name = getDeviceID().c_str();
-const char *mqtt_topic = "/beacon/data";
-char msg[50];
-int scanTime = 3; //In seconds
+//const char* ssid = "TMA Lab 9 2.4Ghz";      
+//const char* password = "12345x@X";  
+//
+//const char* mqtt_server = "m14.cloudmqtt.com";       
+//const int mqtt_port = 13316;
+//const char *mqtt_user = "krvzvfeh";       
+//const char *mqtt_pass = "DsQv2w7F1gOA";
+//const char *mqtt_client_name = getDeviceID().c_str();
+//const char *mqtt_topic = "/beacon/data";
+//char msg[50];
+//int scanTime = 3; //In seconds
 String DeviceID = getDeviceID();
->>>>>>> origin/mtquan_home
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-<<<<<<< HEAD
-=======
 String getDeviceID() {
 	String temp;
 	uint8_t chipid[6];
@@ -54,7 +49,6 @@ String getDeviceID() {
 	}
 	return temp;
 }
->>>>>>> origin/mtquan_home
 void setup_wifi()
 {
   WiFi.mode(WIFI_STA);
@@ -104,23 +98,18 @@ BLEScanResults scanBeacon() {
 }
 void publicMsg(BLEScanResults foundDevices) {
   for (int i = 0;i < foundDevices.getCount();i++) {
-<<<<<<< HEAD
 	  Serial.println();
-	  delay(100);
-    Serial.print("MAC: "+i);
-=======
+	  delay(10);
 	Serial.print("DeviceID: " + DeviceID);
-	Serial.print(" MAC: " + i);
->>>>>>> origin/mtquan_home
+	delay(10);
+	Serial.print(" MAC: ");
     Serial.print(foundDevices.getDevice(i).getAddress().toString().c_str());
-    Serial.print("RSSI:");
+	delay(10);
+	Serial.print("RSSI:");
     Serial.print(foundDevices.getDevice(i).getRSSI());
     Serial.println();
-<<<<<<< HEAD
-    snprintf(msg, 100, "%s|%ld",foundDevices.getDevice(i).getAddress().toString().c_str(), foundDevices.getDevice(i).getRSSI());
-=======
+	delay(10);
     snprintf(msg, 100, "%s|%s|%ld",DeviceID.c_str(),foundDevices.getDevice(i).getAddress().toString().c_str(), foundDevices.getDevice(i).getRSSI());
->>>>>>> origin/mtquan_home
     client.publish(mqtt_topic, msg);
   }
   Serial.println("Public data done!");
