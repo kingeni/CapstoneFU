@@ -212,31 +212,29 @@ function gauss(A) {
     return x;
 }
 
-function contHexToString(A) {
-
-    // cut space in string
-    let newText = A.split(' ').filter(word => word !== "");
-    console.log(newText);
-    //convert string to 16 then convert to ASCII
-    let _newText = newText.map(x => String.fromCharCode(parseInt(x, 16)));
-    let result = "";
-
-    //convert Array to string
-    _newText.forEach(x => result += x);
-
-    //
-    newText = result.split('|');
-    newText[1] = caculateDistance(parseInt(newText[1]));
-    return [...newText];
+function splitInforRecevie(message) {
+    message += "";
+    
+    if (message.indexOf("c8:24:9f:a9:32:29") != -1 || message.indexOf("cd:de:99:f7:06:eb") != -1 || message.indexOf("c3:3a:d6:80:2f:fe") != -1) {
+        
+       var newText = message.split('|');
+        
+        var a =caculateDistance(parseInt(newText[2]));
+        //newText[2] = a;
+        console.log("DISTANCE: " ,a, "RSSI: ", newText[2], "MAC: ", newText[1], "DEVICE: ", newText[0]);
+     //   console.log("DISTANCE: ", newText[2]);
+    }
+    return newText;
 }
-
+    //d = 10 ^ ((TX - RSSI) / 10*n)
 function caculateDistance(RSSI) {
-    var distance = Math.pow(10, ((CONSTANT.TXPOWER - RSSI) / 10 * CONSTANT.N));
-    return distance;
+    var aa = (CONSTANT.TXPOWER - RSSI) / (10 * CONSTANT.N);
+    var distance = Math.pow(10, aa);
+    return Math.round(distance * 100) / 100;
 }
 
 module.exports = {
-    contHexToString: contHexToString,
-    getCoordinates: getCoordinates
+    splitInforRecevie,
+    getCoordinates
 };
 
