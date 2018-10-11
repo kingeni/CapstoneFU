@@ -15,6 +15,10 @@ use Yii;
  */
 class Object extends \yii\db\ActiveRecord
 {
+    const STATUS_NOT_ACTIVE = 1;
+    const STATUS_ACTIVE = 2;
+    const STATUS_DELETED = 3;
+
     /**
      * @inheritdoc
      */
@@ -29,7 +33,7 @@ class Object extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'name', 'note', 'status', 'area_id'], 'required'],
+            [['id', 'name'], 'required'],
             [['status', 'area_id'], 'integer'],
             [['id', 'name'], 'string', 'max' => 300],
             [['note'], 'string', 'max' => 500],

@@ -1,5 +1,8 @@
 var CONSTANT = require('../broker/Constant.js');
 
+var  result = getCoordinates();
+console.log(result);
+
 function getCoordinates(radiusA, radiusB, radiusC) {
     var linearEquaArr = [];
     var pointArrCr1 = [];
@@ -20,7 +23,7 @@ function getCoordinates(radiusA, radiusB, radiusC) {
     // get mid point 
     midPoint[0] = getMidPoint(pointArrCr1[0], pointArrCr1[1]);
     midPoint[1] = getMidPoint(pointArrCr2[0], pointArrCr2[1]);
-
+ //y=ax+b a.a' = -1 => a' = -1/a
     // create equation linear goes throught midPoint and perpendicular
     equaMidPoint[0] = getEquationThroughMidPoint(linearEquaArr[0], midPoint[0]);
     equaMidPoint[1] = getEquationThroughMidPoint(linearEquaArr[1], midPoint[1]);
