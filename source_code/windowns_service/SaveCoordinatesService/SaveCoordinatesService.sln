@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaveCoordinatesService", "SaveCoordinatesService\SaveCoordinatesService.csproj", "{810B0F86-13D6-4C2F-A170-2AFCA576D1E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMQTT", "TestMQTT\TestMQTT.csproj", "{67FB336F-3D9B-4558-BFCE-7C68681C8E22}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{810B0F86-13D6-4C2F-A170-2AFCA576D1E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{810B0F86-13D6-4C2F-A170-2AFCA576D1E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{810B0F86-13D6-4C2F-A170-2AFCA576D1E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{810B0F86-13D6-4C2F-A170-2AFCA576D1E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67FB336F-3D9B-4558-BFCE-7C68681C8E22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67FB336F-3D9B-4558-BFCE-7C68681C8E22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67FB336F-3D9B-4558-BFCE-7C68681C8E22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67FB336F-3D9B-4558-BFCE-7C68681C8E22}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B8D45E45-F5AB-4746-81AB-C04F4169B584}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,12 @@
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\bin\Debug\SaveCoordinatesService.exe.config
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\bin\Debug\SaveCoordinatesService.exe
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\bin\Debug\SaveCoordinatesService.pdb
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\bin\Debug\M2Mqtt.Net.dll
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\bin\Debug\System.Management.Automation.dll
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\bin\Debug\M2Mqtt.Net.pdb
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\obj\Debug\SaveCoordinatesService.csprojResolveAssemblyReference.cache
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\obj\Debug\SaveCoordinatesService.ProjectInstaller.resources
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\obj\Debug\SaveCoordinatesService.csproj.GenerateResource.Cache
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\obj\Debug\SaveCoordinatesService.csproj.CoreCompileInputs.cache
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\obj\Debug\SaveCoordinatesService.exe
+c:\users\huy ta\source\repos\SaveCoordinatesService\SaveCoordinatesService\obj\Debug\SaveCoordinatesService.pdb
