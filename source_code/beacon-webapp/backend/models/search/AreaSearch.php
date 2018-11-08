@@ -5,12 +5,12 @@ namespace backend\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Object;
+use common\models\Area;
 
 /**
- * ObjectSearch represents the model behind the search form about `common\models\Object`.
+ * AreaSearch represents the model behind the search form about `common\models\Area`.
  */
-class ObjectSearch extends Object
+class AreaSearch extends Area
 {
     /**
      * @inheritdoc
@@ -18,9 +18,9 @@ class ObjectSearch extends Object
     public function rules()
     {
         return [
-            [['id', 'name', 'note'], 'safe'],
-            [['safety_distance'], 'number'],
-            [['status', 'area_id'], 'integer'],
+            [['id'], 'integer'],
+            [['name', 'note'], 'safe'],
+            [['length', 'width'], 'number'],
         ];
     }
 
@@ -42,7 +42,7 @@ class ObjectSearch extends Object
      */
     public function search($params)
     {
-        $query = Object::find();
+        $query = Area::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -57,13 +57,12 @@ class ObjectSearch extends Object
         }
 
         $query->andFilterWhere([
-            'safety_distance' => $this->safety_distance,
-            'status' => $this->status,
-            'area_id' => $this->area_id,
+            'id' => $this->id,
+            'length' => $this->length,
+            'width' => $this->width,
         ]);
 
-        $query->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'name', $this->name])
+        $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'note', $this->note]);
 
         return $dataProvider;

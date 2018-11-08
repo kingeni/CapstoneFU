@@ -5,12 +5,12 @@ namespace backend\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Object;
+use common\models\Esp;
 
 /**
- * ObjectSearch represents the model behind the search form about `common\models\Object`.
+ * EspSearch represents the model behind the search form about `common\models\Esp`.
  */
-class ObjectSearch extends Object
+class EspSearch extends Esp
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class ObjectSearch extends Object
     public function rules()
     {
         return [
-            [['id', 'name', 'note'], 'safe'],
-            [['safety_distance'], 'number'],
+            [['id', 'name'], 'safe'],
+            [['x', 'y'], 'number'],
             [['status', 'area_id'], 'integer'],
         ];
     }
@@ -42,7 +42,7 @@ class ObjectSearch extends Object
      */
     public function search($params)
     {
-        $query = Object::find();
+        $query = Esp::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -57,14 +57,14 @@ class ObjectSearch extends Object
         }
 
         $query->andFilterWhere([
-            'safety_distance' => $this->safety_distance,
+            'x' => $this->x,
+            'y' => $this->y,
             'status' => $this->status,
             'area_id' => $this->area_id,
         ]);
 
         $query->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'note', $this->note]);
+            ->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

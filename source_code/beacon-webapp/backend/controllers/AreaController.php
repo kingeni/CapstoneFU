@@ -2,25 +2,24 @@
 
 namespace backend\controllers;
 
-use Yii;
+use backend\models\search\EspSearch;
+use common\models\Esp;
 use common\models\Object;
-use backend\models\search\ObjectSearch;
+use common\models\ObjectCoordinates;
+use Yii;
+use common\models\Area;
+use backend\models\search\AreaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
-use common\helper\MQTT;
 
 /**
- * ObjectController implements the CRUD actions for Object model.
+ * AreaController implements the CRUD actions for Area model.
  */
-class ObjectController extends Controller
+class AreaController extends Controller
 {
-    public static $brokerAddress = '192.168.43.103';
-    public static $host = 1883;
-    public static $topic = 'presence';
-
     /**
      * @inheritdoc
      */
@@ -38,12 +37,12 @@ class ObjectController extends Controller
     }
 
     /**
-     * Lists all Object models.
+     * Lists all Area models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ObjectSearch();
+        $searchModel = new AreaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -54,19 +53,32 @@ class ObjectController extends Controller
 
 
     /**
-     * Displays a single Object model.
-     * @param string $id
+     * Displays a single Area model.
+     * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
         $request = Yii::$app->request;
+        $modelEsp = Esp::find()->where(['area_id' => $id])->all();
+        $listObj = Object::find()->where(['area_id' => $id])->all();
+        $listObjCoo = [];
+        foreach ($listObj as $item) {
+            array_push($listObjCoo, ObjectCoordinates::find()->where(['object_id' => $item->id])->limit(1)->orderBy(['created_at' => SORT_DESC])->one());
+        }
+        $searchModelEsp = new EspSearch();
+        $dataProviderEsp = $searchModelEsp->search(Yii::$app->request->queryParams);
+
         if ($request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                'title' => "Object #" . $id,
+                'title' => "Area #" . $id,
                 'content' => $this->renderAjax('view', [
                     'model' => $this->findModel($id),
+                    'modelEsp' => $modelEsp,
+                    'searchModelEsp' => $searchModelEsp,
+                    'dataProviderEsp' => $dataProviderEsp,
+                    'listObjCoo' => $listObjCoo,
                 ]),
                 'footer' => Html::button('Close', ['class' => 'btn btn-default pull-left', 'data-dismiss' => "modal"]) .
                     Html::a('Edit', ['update', 'id' => $id], ['class' => 'btn btn-primary', 'role' => 'modal-remote'])
@@ -74,12 +86,16 @@ class ObjectController extends Controller
         } else {
             return $this->render('view', [
                 'model' => $this->findModel($id),
+                'modelEsp' => $modelEsp,
+                'searchModelEsp' => $searchModelEsp,
+                'dataProviderEsp' => $dataProviderEsp,
+                'listObjCoo' => $listObjCoo,
             ]);
         }
     }
 
     /**
-     * Creates a new Object model.
+     * Creates a new Area model.
      * For ajax request will return json object
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -87,8 +103,8 @@ class ObjectController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Object();
-        $model->status = Object::STATUS_ACTIVE;
+        $model = new Area();
+
         if ($request->isAjax) {
             /*
             *   Process for ajax request
@@ -96,7 +112,7 @@ class ObjectController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if ($request->isGet) {
                 return [
-                    'title' => "Create new Object",
+                    'title' => "Create new Area",
                     'content' => $this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -105,22 +121,17 @@ class ObjectController extends Controller
 
                 ];
             } else if ($model->load($request->post()) && $model->save()) {
-                $mqtt = new MQTT(self::$brokerAddress, self::$host, "ClientID" . rand()); //Change client name to something unique
-                if ($mqtt->connect()) {
-                    $mqtt->publish(self::$topic, "NewObj|" . $model->id . "|" . $model->safety_distance, 0);
-                    $mqtt->close();
-                }
                 return [
                     'forceReload' => '#crud-datatable-pjax',
-                    'title' => "Create new Object",
-                    'content' => '<span class="text-success">Create Object success</span>',
+                    'title' => "Create new Area",
+                    'content' => '<span class="text-success">Create Area success</span>',
                     'footer' => Html::button('Close', ['class' => 'btn btn-default pull-left', 'data-dismiss' => "modal"]) .
                         Html::a('Create More', ['create'], ['class' => 'btn btn-primary', 'role' => 'modal-remote'])
 
                 ];
             } else {
                 return [
-                    'title' => "Create new Object",
+                    'title' => "Create new Area",
                     'content' => $this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -134,11 +145,6 @@ class ObjectController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                $mqtt = new MQTT(self::$brokerAddress, self::$host, "ClientID" . rand()); //Change client name to something unique
-                if ($mqtt->connect()) {
-                    $mqtt->publish(self::$topic, "NewObj|" . $model->id . "|" . $model->safety_distance, 0);
-                    $mqtt->close();
-                }
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
                 return $this->render('create', [
@@ -150,10 +156,10 @@ class ObjectController extends Controller
     }
 
     /**
-     * Updates an existing Object model.
+     * Updates an existing Area model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
@@ -168,7 +174,7 @@ class ObjectController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if ($request->isGet) {
                 return [
-                    'title' => "Update Object #" . $id,
+                    'title' => "Update Area #" . $id,
                     'content' => $this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -178,7 +184,7 @@ class ObjectController extends Controller
             } else if ($model->load($request->post()) && $model->save()) {
                 return [
                     'forceReload' => '#crud-datatable-pjax',
-                    'title' => "Object #" . $id,
+                    'title' => "Area #" . $id,
                     'content' => $this->renderAjax('view', [
                         'model' => $model,
                     ]),
@@ -187,7 +193,7 @@ class ObjectController extends Controller
                 ];
             } else {
                 return [
-                    'title' => "Update Object #" . $id,
+                    'title' => "Update Area #" . $id,
                     'content' => $this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -210,21 +216,17 @@ class ObjectController extends Controller
     }
 
     /**
-     * Delete an existing Object model.
+     * Delete an existing Area model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
         $request = Yii::$app->request;
         $this->findModel($id)->delete();
-        $mqtt = new MQTT(self::$brokerAddress, self::$host, "ClientID" . rand()); //Change client name to something unique
-        if ($mqtt->connect()) {
-            $mqtt->publish(self::$topic, "DeleteObj|" . $id, 0);
-            $mqtt->close();
-        }
+
         if ($request->isAjax) {
             /*
             *   Process for ajax request
@@ -242,10 +244,10 @@ class ObjectController extends Controller
     }
 
     /**
-     * Delete multiple existing Object model.
+     * Delete multiple existing Area model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionBulkDelete()
@@ -273,70 +275,18 @@ class ObjectController extends Controller
     }
 
     /**
-     * Finds the Object model based on its primary key value.
+     * Finds the Area model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return Object the loaded model
+     * @param integer $id
+     * @return Area the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Object::findOne($id)) !== null) {
+        if (($model = Area::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-
-    public function actionUpdateToRas()
-    {
-        $request = Yii::$app->request;
-        if ($request->isAjax) {
-            /*
-            *   Process for ajax request
-            */
-            $listObj = Object::find()->where('status<>' . Object::STATUS_NOT_ACTIVE)->all();
-            $listObjMAC = '';
-            $count = 0;
-            if (count($listObj) > 0) {
-                foreach ($listObj as $item) {
-                    if ($count == count($listObj)) {
-                        $listObjMAC = $listObjMAC . $item->id . ';';
-                    } else {
-                        $listObjMAC = $listObjMAC . $item->id . '.';
-                    }
-                }
-            }
-
-            $mqtt = new MQTT(self::$brokerAddress, self::$host, "ClientID" . rand()); //Change client name to something unique
-            if ($mqtt->connect()) {
-                $mqtt->publish(self::$topic, "UpdateObjMAC|" . $listObjMAC, 0);
-                $mqtt->close();
-            }
-            return $this->redirect(['index']);
-        } else {
-            /*
-            *   Process for non-ajax request
-            */
-            $listObj = Object::find()->all();
-            $listObjMAC = '';
-            $count = 0;
-            if (count($listObj) > 0) {
-                foreach ($listObj as $item) {
-                    if ($count == count($listObj)) {
-                        $listObjMAC = $listObjMAC . $item->id . ';';
-                    } else {
-                        $listObjMAC = $listObjMAC . $item->id . '.';
-                    }
-                }
-            }
-
-            $mqtt = new MQTT(self::$brokerAddress, self::$host, "ClientID" . rand()); //Change client name to something unique
-            if ($mqtt->connect()) {
-                $mqtt->publish(self::$topic, $listObjMAC, 0);
-                $mqtt->close();
-            }
-            return $this->redirect(['index']);
         }
     }
 

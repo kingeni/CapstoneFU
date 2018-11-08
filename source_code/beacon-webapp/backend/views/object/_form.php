@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -15,14 +16,21 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'safety_distance')->textInput() ?>
+
     <?= $form->field($model, 'note')->textInput(['maxlength' => true]) ?>
-  
-	<?php if (!Yii::$app->request->isAjax){ ?>
-	  	<div class="form-group">
-	        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-	    </div>
-	<?php } ?>
+
+    <?php echo $form->field($model, 'status')->dropDownList(\common\models\Object::statuses(), ['disabled' => 'disabled']) ?>
+
+    <?= $form->field($model, 'area_id')->textInput() ?>
+
+
+    <?php if (!Yii::$app->request->isAjax) { ?>
+        <div class="form-group">
+            <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
+    <?php } ?>
 
     <?php ActiveForm::end(); ?>
-    
+
 </div>

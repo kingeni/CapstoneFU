@@ -20,11 +20,11 @@ return [
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'safety_distance',
+        'attribute'=>'x',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'note',
+        'attribute'=>'y',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
